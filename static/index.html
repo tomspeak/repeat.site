@@ -1,0 +1,112 @@
+<!doctype html>
+  <head>
+    <title>repeat</title>
+    <style>
+      body {
+        color: #565656;
+        background-color: #f1f1f1;
+        letter-spacing: 1px;
+      }
+
+      .container {
+        width: 690px;
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      #title {
+        color: #aad3f0;
+        letter-spacing: 2px;
+        font-family: monospace;
+        font-size: 20px;
+        font-weight: 300;
+        min-height: 24px;
+      }
+
+      #error {
+        background-color: #EE7875;
+        color: #F6F4F0;
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+        padding: 6px 0;
+        white-space: pre;
+        display: none;
+      }
+
+      .show {
+        display: block !important;
+      }
+
+      #code a {
+        display: inline-block;
+        margin-top: 80px;
+        color: #eaadc0;
+        border-bottom: 2px solid #aad3f0;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h3 id="title"></h3>
+
+      <div id="player"></div>
+
+      <div id="error"></div>
+
+      <div id="code">
+        <a href="https://github.com/tomspeak/repeat">Code</a>
+      </div>
+    </div>
+
+
+    <script async src="https://www.youtube.com/iframe_api"></script>
+    <script type="text/javascript">
+      var url = window.location.href
+      var regex = new RegExp('v=(\\w+)\&*?', 'i')
+      var id = regex.exec(url)
+
+      if (!id || !id[1]) {
+        onError(null, '🌸    Please pass in a valid ID: watch?v=ID    🌸')
+      }
+
+      function onYouTubeIframeAPIReady () {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '100%',
+          videoId: id[1],
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange,
+            'onError': onError,
+          }
+        })
+      }
+
+      function onPlayerReady (e) {
+        e.target.playVideo()
+
+        var title = document.getElementById('title')
+        title.textContent = e.target.getVideoData().title
+
+        var error = document.getElementById('error')
+        error.classList.remove('show')
+      }
+
+      function onPlayerStateChange (e) {
+        if (e.data === YT.PlayerState.ENDED) {
+          e.target.playVideo()
+        }
+      }
+
+      function onError (e, msg) {
+        var error = document.getElementById('error')
+        error.textContent = msg || '🌸    Something went wrong, please check the ID that you passed in    🌸'
+        error.classList.add('show')
+      }
+    </script>
+  </body>
+</html>
