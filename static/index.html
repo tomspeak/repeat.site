@@ -83,6 +83,8 @@
         var title = document.getElementById('title')
         title.textContent = e.target.getVideoData().title
 
+        document.title = "[r] - " + title.textContent
+
         var error = document.getElementById('error')
         error.classList.remove('show')
       }
@@ -97,6 +99,7 @@
         var error = document.getElementById('error')
         error.textContent = msg || '🌸    Something went wrong, please check the ID that you passed in    🌸'
         error.classList.add('show')
+        document.title = "repeat - error"
       }
     </script>
   </body>
