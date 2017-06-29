@@ -61,14 +61,31 @@
         border-bottom: 2px solid #aad3f0;
         text-decoration: none;
       }
+
+      .hidden {
+        display: none;
+      }
+
+      #hide {
+        margin-top: 44px;
+      }
     </style>
   </head>
 
   <body>
     <div class="container">
-      <h3 id="title"></h3>
-      <div id="player"></div>
+      <div id="content">
+        <h3 id="title"></h3>
+        <div id="player"></div>
+      </div>
+
       <div id="error"></div>
+
+      <div>
+        <input type="checkbox" id="hide" />
+        <label for="hide">Hide content?</label>
+      </div>
+
       <div id="code">
         <a href="https://github.com/tomspeak/repeat.site">Code</a>
       </div>
@@ -83,6 +100,8 @@
       if (!id || !id[1]) {
         onError(null, '🌸    Please pass in a valid url e.g: repeat.site/watch?v=7k6iFwAWMHA    🌸')
       }
+
+      document.getElementById('hide').addEventListener('change', onToggleHide)
 
       function onYouTubeIframeAPIReady () {
         player = new YT.Player('player', {
@@ -120,6 +139,26 @@
         error.textContent = msg || '🌸    Something went wrong, please check the ID that you passed in    🌸'
         error.classList.add('show')
         document.title = "repeat - error"
+      }
+
+      function updateDocTitle (showTitle) {
+        if (showTitle) {
+          var title = document.getElementById('title')
+
+          document.title = "[r] - " + title.textContent
+        } else {
+          document.title = "repeat"
+        }
+      }
+
+      function onToggleHide (e) {
+        document.getElementById('content').classList.toggle('hidden')
+
+        if (e.target.checked) {
+          updateDocTitle(false)
+        } else {
+          updateDocTitle(true)
+        }
       }
     </script>
   </body>
