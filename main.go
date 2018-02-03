@@ -16,6 +16,8 @@ func main() {
 		http.ServeFile(w, r, "./static/index.html")
 	})
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+
 	log.Println("Running Repeat")
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
