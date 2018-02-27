@@ -21,7 +21,7 @@ var renderFavourites = function() {
   favourites.forEach(function(favourite) {
     var a = document.createElement("a");
     a.classList.add("fav");
-    a.href = "http://repeat.site/watch?v=" + favourite.video_id;
+    a.href = window.location.protocol + "//" + window.location.hostname + "/watch?v=" + favourite.video_id;
     a.textContent = favourite.title;
     frag.appendChild(a);
   });
@@ -36,7 +36,7 @@ var inFavourites = function(video_id) {
 };
 
 var renderFavourite = function(video_id) {
-  return inFavourites(video_id) ? "\u2606" : "\u2605";
+  return inFavourites(video_id) ? "\u2605" : "\u2606";
 };
 
 var outputFavourite = function(video_id) {
