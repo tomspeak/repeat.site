@@ -1,4 +1,4 @@
-# [Repeat](http://repeat.site)
+# [Repeat](https://repeat.site)
 
 Allows you to loop a YouTube video fo' eva'.
 
