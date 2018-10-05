@@ -24,47 +24,67 @@
 
   <title>repeat</title>
   <style>
+    html { min-height: 100%; position: relative; }
     body {
-      color: #565656;
-      background-color: #f1f1f1;
+      background: #FFFFFF;
+      color: #000000;
       letter-spacing: 1px;
+      font-family: Palatino,'Palatino Linotype',serif;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .is-dark-theme {
+      background: #282A36;
+      color: #8BE9FD;
+    }
+    .is-dark-theme .fav {
+      color: #FF5555;
+    }
+    .is-dark-theme .fav:before {
+      color: #FFFFFF;
+    }
+    .is-dark-theme #footer {
+      background-color: #44475A;
     }
 
     .container {
       width: 690px;
       max-width: 95%;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 24px 54px;
     }
 
     #title {
-      color: #aad3f0;
       letter-spacing: 2px;
-      font-family: monospace;
       font-size: 20px;
       font-weight: 300;
       min-height: 24px;
+      display: inline-block;
+      vertical-align: middle;
+      width: 90%;
     }
 
     #error,
     #info {
-      background-color: #EE7875;
-      color: #F6F4F0;
       font-size: 15px;
       width: 100%;
+      padding: 50px 0;
       text-align: center;
-      padding: 6px 0;
       white-space: pre;
       display: none;
+      border: 1px solid #000000;
     }
 
     #info {
-      background-color: #92b993;
+      color: #000000;
     }
 
     #info a {
       text-decoration: none;
-      border-bottom: 2px solid #aad3f0;
+      border-bottom: 2px solid #0076ff;
       color: inherit;
     }
 
@@ -76,34 +96,57 @@
       display: none !important;
     }
 
+    #controls {
+      text-align: right;
+      margin-top: 12px;
+    }
+
     #favourite {
-      float: left;
-      margin-right: 24px;
+      font-size: 26px;
+      margin-right: 10px;
       cursor: pointer;
-      color: #aad3f0;
     }
 
     #favourites {
-      margin-top: 24px;
+      margin: 44px 0;
+      padding-bottom: 44px;
+    }
+
+    #favourites-title {
+      text-decoration: underline;
     }
 
     .fav {
       display: block;
-      color: #aad3f0;
-      letter-spacing: 2px;
-      font-family: monospace;
-      font-size: 14px;
+      color: #0076ff;
+      letter-spacing: 1px;
+      font-size: 17px;
       font-weight: 300;
       min-height: 24px;
-      margin: 12px 0;
+      margin: 12px 0 18px;
+    }
+    .fav:before {
+      content: '∞';
+      text-decoration: none !important;
+      color: #000000;
+      display: inline-block;
+      margin-right: 8px;
     }
 
     #footer {
+      height: 40px;
       position: absolute;
-      bottom: 24px;
-      left: 24px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 0 24px;
       display: flex;
-      align-items: baseline;
+      align-items: center;
+      justify-content: flex-end;
+      background: #000000;
+      color: #FFFFFF;
+      font-size: 13px;
+      user-select: none;
     }
 
     #footer span {
@@ -113,23 +156,17 @@
 
     .footer__item a {
       display: inline-block;
-      margin-top: 80px;
-      color: #eaadc0;
-      border-bottom: 2px solid #aad3f0;
-      text-decoration: none;
+      color: #FFFFFF;
+      text-decoration: underline;
     }
 
     .hidden {
       display: none;
     }
-
-    #hide {
-      margin-top: 44px;
-    }
   </style>
 </head>
 
-<body>
+<body id="body">
   <div class="container">
     <div id="content">
       <span id="favourite" title="Favourite"></span>
@@ -150,10 +187,13 @@
     </div>
 
     <div id="footer">
+			<div class="footer__item" style="margin-right: auto;">
+				<div id="toggle-theme" style="cursor: pointer;">Toggle theme</div>
+			</div>
       <div class="footer__item">
         <a href="https://github.com/tomspeak/repeat.site">code</a>
       </div>
-      <span> // </span>
+      <span style="font-size: 18px;"> ∞ </span>
       <div class="footer__item">
         <a href="mailto:tom@speak.sh">contact</a>
       </div>
